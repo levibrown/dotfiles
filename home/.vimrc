@@ -41,7 +41,7 @@ let maplocalleader=","
 set clipboard=unnamed         " mvim use clipboard
 set complete=.,t              " auto-complete use tags and open file
 
-nnoremap - :Switch<cr>        " Switch/Cycle various command i.e ERB tags
+nnoremap - :Switch<cr>
 nmap <leader>tb :TagbarToggle<CR>   " Toggle Tagbar
 
 " Splits
