@@ -20,7 +20,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'rking/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
-Bundle 'bling/vim-bufferline'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'austintaylor/vim-choosecolor'
 Bundle 'ap/vim-css-color'
@@ -32,8 +31,10 @@ Bundle 'rhysd/vim-textobj-ruby'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'majutsushi/tagbar'
 Bundle 't9md/vim-ruby-xmpfilter'
+Bundle "szw/vim-ctrlspace" 
 
 inoremap jj <esc>
+
 filetype plugin indent on     " required!
 
 let mapleader=","
@@ -101,6 +102,7 @@ nnoremap <leader>rv :source $MYVIMRC<cr>
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'lucius'
 let g:airline_right_sep = ''
+let g:airline_exclude_preview = 1 "for ctrl-space
 
 set nocompatible            " Disable vi-compatibility
 set laststatus=2            " Always show the statusline
@@ -146,6 +148,11 @@ let g:ragtag_global_maps = 1
 let g:SuperTabMappingTabLiteral = '<tab>' " Keep tab default
 let g:SuperTabMappingForward = '<C-tab>'
 let g:SuperTabMappingBackward = '<s-tab>' 
+
+augroup sparkup_types
+  autocmd!
+  autocmd FileType eruby runtime! ftplugin/html/sparkup.vim
+augroup END
 
 " Ruby specific options
 let ruby_operators = 1
