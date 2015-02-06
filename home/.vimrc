@@ -17,7 +17,6 @@ Bundle 'tpope/vim-rvm'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'gregsexton/gitv'
 Bundle 'scrooloose/nerdtree'
-Bundle 'rking/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -32,9 +31,11 @@ Bundle 'jiangmiao/auto-pairs'
 Bundle 'majutsushi/tagbar'
 Bundle 't9md/vim-ruby-xmpfilter'
 Bundle "szw/vim-ctrlspace" 
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'mustache/vim-mustache-handlebars'
 
 inoremap jj <esc>
-
+syntax enable
 filetype plugin indent on     " required!
 
 let mapleader=","
@@ -52,9 +53,17 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Window resizing mappings /*{{{*/
+nnoremap <Up><Up> <C-W>10+
+nnoremap <Down><Down> <C-W>10-
+nnoremap <Left><Left> <C-W>10<
+nnoremap <Right><Right> <C-W>10>
+
 " better defaults for splits
 set splitbelow
 set splitright
+
+nmap <C-\> :vsplit<CR>:let word=expand("<cword>")<CR><C-W><C-W>:exec "tag" word<CR>
 
 set mouse=a                 "use mouse in iterm
 
@@ -104,6 +113,23 @@ let g:airline_theme = 'lucius'
 let g:airline_right_sep = ''
 let g:airline_exclude_preview = 1 "for ctrl-space
 
+function! AirLineConfig()
+  function! Modified()
+    return &modified ? " +" : ''
+  endfunction
+
+  call airline#parts#define_raw('filename', '%<%f')
+  call airline#parts#define_function('modified', 'Modified')
+
+  let g:airline_section_b = airline#section#create_left(['filename'])
+  let g:airline_section_c = airline#section#create([''])
+  let g:airline_section_gutter = airline#section#create(['modified', '%='])
+  let g:airline_section_x = airline#section#create_right([''])
+  let g:airline_section_y = airline#section#create_right([''])
+  let g:airline_section_z = airline#section#create(['branch'])
+endfunction
+autocmd Vimenter * call AirLineConfig()
+
 set nocompatible            " Disable vi-compatibility
 set laststatus=2            " Always show the statusline
 set encoding=utf-8          " Necessary to show Unicode glyphs
@@ -114,6 +140,23 @@ set shiftwidth=2
 set expandtab
 set hlsearch
 map // :noh <cr>
+
+" The Silver Searcher
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
+
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+" bind \ (backward slash) to grep shortcut
+nnoremap \ :Ag<SPACE>
 
 " Quickfix window auto height
 au FileType qf call AdjustWindowHeight(3, 40)
@@ -160,18 +203,3 @@ augroup rubyindentstyle
 autocmd!
   autocmd FileType ruby,eruby,yaml set autoindent shiftwidth=2 softtabstop=2 expandtab
 augroup END
-
-" Xmpfilter/seeing_is_believing
-let g:xmpfilter_cmd = "seeing_is_believing"
-autocmd FileType ruby nmap <buffer> <leader>m <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby xmap <buffer> <leader>m <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby imap <buffer> <leader>m <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby nmap <buffer> <leader>c <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby xmap <buffer> <leader>c <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby imap <buffer> <leader>c <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby nmap <buffer> <leader>r <Plug>(seeing_is_believing-run_-x)
-autocmd FileType ruby xmap <buffer> <leader>r <Plug>(seeing_is_believing-run_-x)
-autocmd FileType ruby imap <buffer> <leader>r <Plug>(seeing_is_believing-run_-x)
-autocmd FileType ruby nmap <buffer> <leader><leader>r <Plug>(seeing_is_believing-run)
-autocmd FileType ruby xmap <buffer> <leader><leader>r <Plug>(seeing_is_believing-run)
-autocmd FileType ruby imap <buffer> <leader><leader>r <Plug>(seeing_is_believing-run)
