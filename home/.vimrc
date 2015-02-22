@@ -17,6 +17,7 @@ Bundle 'tpope/vim-rvm'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'gregsexton/gitv'
 Bundle 'scrooloose/nerdtree'
+Bundle 'rking/ag.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -53,7 +54,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Window resizing mappings /*{{{*/
+" Window resizing mappings
 nnoremap <Up><Up> <C-W>10+
 nnoremap <Down><Down> <C-W>10-
 nnoremap <Left><Left> <C-W>10<
@@ -141,19 +142,15 @@ set expandtab
 set hlsearch
 map // :noh <cr>
 
-" The Silver Searcher
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|bower_components|node_modules)$',
+  \ 'file': '\v\.(exe|so|dll|swp)$',
+  \ }
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
-
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
 
 " bind \ (backward slash) to grep shortcut
 nnoremap \ :Ag<SPACE>
@@ -176,7 +173,7 @@ endfunction
 
 " Nerdtree
 let g:NERDTreeWinSize = 40
-map <leader>n :NERDTreeToggle /Users/levibrown/g5 <CR>
+map <leader>n :NERDTreeToggle /Users/levibrown/Sites <CR>
 map <leader><leader>n :NERDTreeFind <CR>
 
 let NERDTreeQuitOnOpen=1    "close nerdtree after file opened
