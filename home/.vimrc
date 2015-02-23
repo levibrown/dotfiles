@@ -116,23 +116,29 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'lucius'
 let g:airline_right_sep = ''
 let g:airline_exclude_preview = 1 "for ctrl-space
+let g:airline_section_x = airline#section#create_right([''])
+let g:airline_section_y = airline#section#create_right([''])
 
-function! AirLineConfig()
-  function! Modified()
-    return &modified ? " +" : ''
-  endfunction
+let g:airline#extensions#default#section_truncate_width = {
+  \ 'b': 60,
+  \ 'x': 80,
+  \ 'y': 80,
+  \ 'z': 80
+  \ }
 
-  call airline#parts#define_raw('filename', '%<%f')
-  call airline#parts#define_function('modified', 'Modified')
-
-  let g:airline_section_b = airline#section#create_left(['filename'])
-  let g:airline_section_c = airline#section#create([''])
-  let g:airline_section_gutter = airline#section#create(['modified', '%='])
-  let g:airline_section_x = airline#section#create_right([''])
-  let g:airline_section_y = airline#section#create_right([''])
-  let g:airline_section_z = airline#section#create(['branch'])
-endfunction
-autocmd Vimenter * call AirLineConfig()
+let g:airline_mode_map = {
+  \ '__' : '-',
+  \ 'n'  : 'N',
+  \ 'i'  : 'I',
+  \ 'R'  : 'R',
+  \ 'v'  : 'V',
+  \ 'V'  : 'V-L',
+  \ 'c'  : 'C',
+  \ '' : 'V-B',
+  \ 's'  : 'S',
+  \ 'S'  : 'S-L',
+  \ '' : 'S-B',
+  \ }
 
 set nocompatible            " Disable vi-compatibility
 set laststatus=2            " Always show the statusline
