@@ -47,6 +47,9 @@ set complete=.,t              " auto-complete use tags and open file
 nnoremap - :Switch<cr>
 nmap <leader>tb :TagbarToggle<CR>   " Toggle Tagbar
 
+" auto-pairs
+let g:AutoPairs={'(':')', '[':']', '{':'}'}
+
 " Splits
 " map ctrl-w + hjkl to ctrl-hjkl
 nnoremap <C-J> <C-W><C-J>
