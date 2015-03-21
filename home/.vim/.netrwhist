@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/Users/levibrown/.homesick/repos/dotfiles/home/.vim/bundle'
 let g:netrw_dirhist_2='/Users/levibrown/.homesick/repos/dotfiles/home/.vim'
 let g:netrw_dirhist_3='/Users/levibrown/Sites/rails/api-test'
 let g:netrw_dirhist_4='/Users/levibrown'
+let g:netrw_dirhist_5='/Users/levibrown/Sites/Ember/forcast'

@@ -33,7 +33,6 @@ Plugin 'rhysd/vim-textobj-ruby'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
 Plugin 't9md/vim-ruby-xmpfilter'
-Plugin "szw/vim-ctrlspace" 
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mustache/vim-mustache-handlebars'
 
