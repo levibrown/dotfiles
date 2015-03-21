@@ -1,43 +1,47 @@
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-Bundle 'gmarik/vundle'
-Bundle 'jonathanfilip/vim-lucius'
-Bundle 'gregsexton/Atom'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rails.git'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-ragtag'
-Bundle 'tpope/vim-rvm'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'gregsexton/gitv'
-Bundle 'scrooloose/nerdtree'
-Bundle 'rking/ag.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'austintaylor/vim-choosecolor'
-Bundle 'ap/vim-css-color'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'ghostbar/snipmate.vim'
-Bundle 'AndrewRadev/switch.vim'
-Bundle 'kana/vim-textobj-user'
-Bundle 'rhysd/vim-textobj-ruby'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'majutsushi/tagbar'
-Bundle 't9md/vim-ruby-xmpfilter'
-Bundle "szw/vim-ctrlspace" 
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'mustache/vim-mustache-handlebars'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'gregsexton/Atom'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails.git'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-ragtag'
+Plugin 'tpope/vim-rvm'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'gregsexton/gitv'
+Plugin 'scrooloose/nerdtree'
+Plugin 'rking/ag.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'austintaylor/vim-choosecolor'
+Plugin 'ap/vim-css-color'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'ghostbar/snipmate.vim'
+Plugin 'AndrewRadev/switch.vim'
+Plugin 'kana/vim-textobj-user'
+Plugin 'rhysd/vim-textobj-ruby'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'majutsushi/tagbar'
+Plugin 't9md/vim-ruby-xmpfilter'
+Plugin "szw/vim-ctrlspace" 
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'mustache/vim-mustache-handlebars'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 inoremap jj <esc>
 syntax enable
-filetype plugin indent on     " required!
 
 let mapleader=","
 let maplocalleader=","
