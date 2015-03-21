@@ -154,8 +154,13 @@ set expandtab
 set hlsearch
 map // :noh <cr>
 
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-let g:ctrlp_use_caching = 0
+
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 1
+endif
+
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|bower_components|node_modules)$',
   \ 'file': '\v\.(exe|so|dll|swp)$',
